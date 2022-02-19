@@ -1,4 +1,4 @@
-package io.securitycorespringsecurity.controller;
+package io.security.corespringsecurity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
