@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
-    public String login() {
+    @GetMapping(value="/login")
+    public String login(){
         return "user/login/login";
     }
 
