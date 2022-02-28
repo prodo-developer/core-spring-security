@@ -1,8 +1,12 @@
 package io.security.corespringsecurity.security.handler;
 
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -15,34 +19,35 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class CustomAuthenticationHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
     private RequestCache requestCache = new HttpSessionRequestCache(); // 사용자가 요청한 객체를 참조
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     /**
-     * Request Cashing
+     *
      * @param request
      * @param response
-     * @param authentication
+     * @param exception
      * @throws IOException
      * @throws ServletException
      */
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 
-        //기본 url
-        setDefaultTargetUrl("/");
+        String errorMassage = "Invalid Username or Password";
 
         SavedRequest savedRequest = requestCache.getRequest(request, response); // 요청한 정보
 
-        if(savedRequest != null) {
-            String targetUrl = savedRequest.getRedirectUrl();
-            redirectStrategy.sendRedirect(request, response, targetUrl);
-        } else {
-            redirectStrategy.sendRedirect(request, response, getDefaultTargetUrl());
+        if(exception instanceof BadCredentialsException) {
+            errorMassage = "Invalid Username or Password";
+        } else if(exception instanceof InsufficientAuthenticationException){
+            errorMassage = "Invalid Secret Key";
         }
 
+        setDefaultFailureUrl("/login?error=true&exception" + exception.getMessage());
+
+        super.onAuthenticationFailure(request, response, exception);
     }
 }
