@@ -46,7 +46,8 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
             errorMassage = "Invalid Secret Key";
         }
 
-        setDefaultFailureUrl("/login?error=true&exception" + exception.getMessage());
+        // 파라미터가 아닌 전체 url로 인식 (/login?error=true&exception)
+        setDefaultFailureUrl("/login?error=true&exception" + errorMassage);
 
         super.onAuthenticationFailure(request, response, exception);
     }
