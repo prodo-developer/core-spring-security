@@ -7,6 +7,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
 
-    @GetMapping(value="/login")
+    @GetMapping(value={"/login", "/api/login"})
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "exception", required = false) String exception, Model model){
 
@@ -37,7 +38,7 @@ public class LoginController {
         return "redirect:/login";
     }
 
-    @GetMapping("/denied")
+    @GetMapping(value={"/denied","/api/denied"})
     public String accessDenied(@RequestParam(value = "exception", required = false) String exception, Model model) {
         // 사용자 정보 출력
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
