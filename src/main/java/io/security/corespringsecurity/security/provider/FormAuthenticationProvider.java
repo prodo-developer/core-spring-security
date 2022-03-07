@@ -23,6 +23,10 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public FormAuthenticationProvider(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
     /**
      * 검증을 위한 구현
      * @param authentication

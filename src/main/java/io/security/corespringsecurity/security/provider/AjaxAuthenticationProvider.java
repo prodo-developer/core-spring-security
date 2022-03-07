@@ -21,6 +21,14 @@ public class AjaxAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public AjaxAuthenticationProvider(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    public AjaxAuthenticationProvider() {
+
+    }
+
     /**
      * 검증을 위한 구현
      * @param authentication
