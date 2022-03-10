@@ -15,7 +15,7 @@ public class UrlResourcesMapFactoryBean implements FactoryBean<LinkedHashMap<Req
     // Bean으로 만들 resourceMap
     private LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resourceMap;
 
-    public UrlResourcesMapFactoryBean(SecurityResourceService securityResourceService) {
+    public void setSecurityResourceService(SecurityResourceService securityResourceService) {
         this.securityResourceService = securityResourceService;
     }
 

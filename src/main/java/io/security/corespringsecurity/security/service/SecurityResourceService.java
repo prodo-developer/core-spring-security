@@ -15,7 +15,7 @@ public class SecurityResourceService {
 
     private ResourcesRepository resourcesRepository;
 
-    public void setResourceRepository(ResourcesRepository resourcesRepository) {
+    public SecurityResourceService(ResourcesRepository resourcesRepository) {
         this.resourcesRepository = resourcesRepository;
     }
 
