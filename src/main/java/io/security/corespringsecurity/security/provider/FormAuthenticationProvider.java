@@ -37,11 +37,12 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         String username = authentication.getName();
+//        String password = (String) authentication.getCredentials();
         String password = (String) authentication.getCredentials();
 
         AccountContext accountContext = (AccountContext) userDetailsService.loadUserByUsername(username);
 
-        if(!passwordEncoder.matches(password, accountContext.getAccount().getPassword())) {
+        if(!passwordEncoder.matches(password, "{bcrypt}" + accountContext.getAccount().getPassword())) {
            throw new BadCredentialsException("BadCredentialsException");
         }
 
