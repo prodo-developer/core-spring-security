@@ -43,15 +43,21 @@ public class UrlSecurityMetadataSource implements FilterInvocationSecurityMetada
         return null;
     }
 
+    /**
+     * 웹 기반 인가 실시간 반영하기
+     * 자원관련된 업데이트가 될 때 DB의 지원을 가져와서 매핑.
+     * @throws Exception
+     */
     public void reload() throws Exception {
 
+        // 자원과 권한 가져오기
         LinkedHashMap<RequestMatcher, List<ConfigAttribute>> reloadedMap = securityResourceService.getResourceList();
         Iterator<Map.Entry<RequestMatcher, List<ConfigAttribute>>> iterator = reloadedMap.entrySet().iterator();
         requestMap.clear();
 
         while (iterator.hasNext()) {
             Map.Entry<RequestMatcher, List<ConfigAttribute>> entry = iterator.next();
-
+            // db로 매핑된 정보를 requestMap에 최신 실시간 정보 반영.
             requestMap.put(entry.getKey(), entry.getValue());
         }
     }

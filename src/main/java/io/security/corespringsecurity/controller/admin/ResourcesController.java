@@ -9,7 +9,6 @@ import io.security.corespringsecurity.service.ResourcesService;
 import io.security.corespringsecurity.service.RoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +32,7 @@ public class ResourcesController {
     private RoleService roleService;
 
     @Autowired
-    private UrlSecurityMetadataSource urlSecurityMetadataSource;
+    private UrlSecurityMetadataSource urlSecurityMetadataSource; // 웹 기반 인가 실시간 반영
 
     @GetMapping(value="/admin/resources")
     public String getResources(Model model) throws Exception {
@@ -54,8 +53,8 @@ public class ResourcesController {
         Resources resources = modelMapper.map(resourcesDto, Resources.class);
         resources.setRoleSet(roles);
 
-        resourcesService.createResources(resources);
-        urlSecurityMetadataSource.reload();
+        resourcesService.createResources(resources); // 자원 생성
+        urlSecurityMetadataSource.reload(); // 실시간 반영
 
         return "redirect:/admin/resources";
     }
@@ -93,8 +92,8 @@ public class ResourcesController {
     public String removeResources(@PathVariable String id, Model model) throws Exception {
 
         Resources resources = resourcesService.getResources(Long.valueOf(id));
-        resourcesService.deleteResources(Long.valueOf(id));
-        urlSecurityMetadataSource.reload();
+        resourcesService.deleteResources(Long.valueOf(id)); // 자원 삭제
+        urlSecurityMetadataSource.reload(); // 실시간 반영
 
         return "redirect:/admin/resources";
     }

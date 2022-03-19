@@ -42,6 +42,7 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration{
         return new UrlSecurityMetadataSource(urlResourcesMapFactoryBean().getObject(), securityResourceService);
     }
 
+    // 웹 기반 인가 실시간 반영
     @Bean
     public UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(){
         UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();

@@ -19,6 +19,10 @@ public class SecurityResourceService {
         this.resourcesRepository = resourcesRepository;
     }
 
+    /**
+     * 자원과 권한 가져오기
+     * @return
+     */
     public LinkedHashMap<RequestMatcher, List<ConfigAttribute>> getResourceList() {
 
         LinkedHashMap<RequestMatcher, List<ConfigAttribute>> result = new LinkedHashMap<>();
