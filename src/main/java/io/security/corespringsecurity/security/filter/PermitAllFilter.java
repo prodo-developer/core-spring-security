@@ -18,9 +18,11 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
     private boolean observeOncePerRequest = true;
 
     private List<RequestMatcher> permitAllRequestMatchers =  new ArrayList<>();
-
+    
+    // 일치여부 판단
     public PermitAllFilter(String...permitAllResources){
-
+        
+        // 인증이나 인가가 필요없는것들 저장
         for(String resource : permitAllResources){
             permitAllRequestMatchers.add(new AntPathRequestMatcher(resource));
         }
@@ -29,6 +31,7 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
     @Override
     protected InterceptorStatusToken beforeInvocation(Object object) {
 
+        // 인가처리 하기전에 permitAll 처리
         boolean permitAll = false;
         HttpServletRequest request = ((FilterInvocation) object).getRequest();
         for(RequestMatcher requestMatcher : permitAllRequestMatchers){
@@ -58,7 +61,8 @@ public class PermitAllFilter extends FilterSecurityInterceptor {
             if (fi.getRequest() != null && observeOncePerRequest) {
                 fi.getRequest().setAttribute(FILTER_APPLIED, Boolean.TRUE);
             }
-
+            
+            // 부모로 호출하기전에 인가처리
             InterceptorStatusToken token = beforeInvocation(fi);
 
             try {
