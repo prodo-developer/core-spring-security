@@ -22,7 +22,8 @@ public class RoleHierarchyServiceImpl implements RoleHierarchyService {
     @Transactional
     @Override
     public String findAllHierarchy() {
-
+        
+        // DB에서 계층 권한 가져옴
         List<RoleHierarchy> rolesHierarchy = roleHierarchyRepository.findAll();
 
         Iterator<RoleHierarchy> itr = rolesHierarchy.iterator();
