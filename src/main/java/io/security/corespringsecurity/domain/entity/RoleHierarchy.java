@@ -16,6 +16,9 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Getter
+@Setter
+@Builder
 @ToString(exclude = {"parentName", "roleHierarchy"})
 public class RoleHierarchy implements Serializable {
 
