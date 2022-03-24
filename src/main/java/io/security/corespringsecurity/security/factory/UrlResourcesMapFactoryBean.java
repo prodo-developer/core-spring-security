@@ -1,6 +1,6 @@
 package io.security.corespringsecurity.security.factory;
 
-import io.security.corespringsecurity.security.service.SecurityResourceService;
+import io.security.corespringsecurity.service.SecurityResourceService;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.util.matcher.RequestMatcher;

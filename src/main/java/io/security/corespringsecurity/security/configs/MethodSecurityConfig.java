@@ -1,6 +1,6 @@
 package io.security.corespringsecurity.security.configs;
 
-import io.security.corespringsecurity.security.service.SecurityResourceService;
+import io.security.corespringsecurity.service.SecurityResourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
