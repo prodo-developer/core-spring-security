@@ -49,10 +49,11 @@ public class IpAddressVoter implements AccessDecisionVoter<Object> {
 
         for(String ipAddress : accessIpList){
             if(remoteAddress.equals(ipAddress)){
-                return ACCESS_ABSTAIN;
+                return ACCESS_ABSTAIN; // 다른 심의
             }
         }
-
+        
+        // IP가 허용이 안되면 바로 차단
         if(result == ACCESS_DENIED){
             throw new AccessDeniedException("Invalid IpAddress");
         }
