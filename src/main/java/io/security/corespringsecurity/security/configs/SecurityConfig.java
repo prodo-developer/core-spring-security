@@ -174,9 +174,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
         accessDecisionVoters.add(new IpAddressVoter(securityResourceService));
+        accessDecisionVoters.add(roleVoter());
 
 //      return Arrays.asList(new RoleVoter()); // 각각권한 적용
-        return Arrays.asList(roleVoter());// 계층권한 적용
+        return accessDecisionVoters;// 계층권한 적용
 
     }
 
