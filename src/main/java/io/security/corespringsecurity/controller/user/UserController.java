@@ -80,4 +80,10 @@ public class UserController {
 
         return "user/mypage";
     }
+
+    @GetMapping("/order")
+    public String order(){
+        userService.order();
+        return "user/mypage";
+    }
 }

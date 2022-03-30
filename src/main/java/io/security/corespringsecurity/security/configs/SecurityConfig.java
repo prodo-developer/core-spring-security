@@ -42,7 +42,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true) // 메소드 보안 활성화
 @Slf4j
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
