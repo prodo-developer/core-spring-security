@@ -90,6 +90,15 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    /**
+     * public class MethodSecurityInterceptor extends AbstractSecurityInterceptor implements MethodInterceptor {
+     *     public Object invoke(MethodInvocation mi) throws Throwable {
+     *         InterceptorStatusToken token = super.beforeInvocation(mi);
+     *
+     *         Object result;
+     *         try {
+     *             result = mi.proceed(); // 호출을 통해 @Secured("ROLE_MANAGER")를 가져온다.
+     */
     @Override
     @Secured("ROLE_MANAGER")
     public void order() {
