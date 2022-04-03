@@ -24,7 +24,7 @@ public class SecurityResourceService {
     }
 
     /**
-     * 자원과 권한 가져오기
+     * 자원과 권한 가져오기 url 방식
      * @return
      */
     public LinkedHashMap<RequestMatcher, List<ConfigAttribute>> getResourceList() {
@@ -43,6 +43,40 @@ public class SecurityResourceService {
 
         });
 
+        return result;
+    }
+    
+    // 자원과 권한 가져오기 method 방식
+    public LinkedHashMap<String, List<ConfigAttribute>> getMethodResourceList() {
+
+        LinkedHashMap<String, List<ConfigAttribute>> result = new LinkedHashMap<>();
+        List<Resources> resourcesList = resourcesRepository.findAllMethodResources();
+        resourcesList.forEach(re ->
+                {
+                    List<ConfigAttribute> configAttributeList = new ArrayList<>();
+                    re.getRoleSet().forEach(ro -> {
+                        configAttributeList.add(new SecurityConfig(ro.getRoleName()));
+                    });
+                    result.put(re.getResourceName(), configAttributeList);
+                }
+        );
+        return result;
+    }
+
+    // 자원과 권한 가져오기 pointcut 방식
+    public LinkedHashMap<String, List<ConfigAttribute>> getPointcutResourceList() {
+
+        LinkedHashMap<String, List<ConfigAttribute>> result = new LinkedHashMap<>();
+        List<Resources> resourcesList = resourcesRepository.findAllPointcutResources();
+        resourcesList.forEach(re ->
+                {
+                    List<ConfigAttribute> configAttributeList = new ArrayList<>();
+                    re.getRoleSet().forEach(ro -> {
+                        configAttributeList.add(new SecurityConfig(ro.getRoleName()));
+                    });
+                    result.put(re.getResourceName(), configAttributeList);
+                }
+        );
         return result;
     }
 
