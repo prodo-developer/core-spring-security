@@ -165,6 +165,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new UrlSecurityMetadataSource(urlResourcesMapFactoryBean().getObject(), securityResourceService);
     }
 
+    // 웹 기반 인가 실시간 반영
+    @Bean
+    public UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(){
+        UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();
+        urlResourcesMapFactoryBean.setSecurityResourceService(securityResourceService);
+        return urlResourcesMapFactoryBean;
+    }
+
     private AccessDecisionManager affirmativeBased() {
         AffirmativeBased affirmativeBased = new AffirmativeBased(getAccessDecisionVoters());
         return affirmativeBased;
@@ -186,13 +194,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         RoleHierarchyVoter roleHierarchyVoter = new RoleHierarchyVoter(roleHierarchy());
         return roleHierarchyVoter;
-    }
-
-    // 웹 기반 인가 실시간 반영
-    @Bean
-    public UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(){
-        UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();
-        urlResourcesMapFactoryBean.setSecurityResourceService(securityResourceService);
-        return urlResourcesMapFactoryBean;
     }
 }

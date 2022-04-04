@@ -12,9 +12,9 @@ import java.security.Principal;
 @Controller
 public class AopSecurityController {
 
-//    @Autowired
-//    private AopMethodService aopMethodService;
-//
+    @Autowired
+    private AopMethodService aopMethodService;
+
 //    @Autowired
 //    private AopPointcutService aopPointcutService;
 //
@@ -31,15 +31,15 @@ public class AopSecurityController {
 
     }
 
-//    @GetMapping("/methodSecured")
-//    public String methodSecured(Model model){
-//
-//        aopMethodService.methodSecured();
-//        model.addAttribute("method", "Success MethodSecured");
-//
-//        return "aop/method";
-//    }
-//
+    @GetMapping("/methodSecured")
+    public String methodSecured(Model model){
+
+        aopMethodService.methodSecured();
+        model.addAttribute("method", "Success MethodSecured");
+
+        return "aop/method";
+    }
+
 //    @GetMapping("/pointcutSecured")
 //    public String pointcutSecured(Model model){
 //

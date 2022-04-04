@@ -1,5 +1,6 @@
 package io.security.corespringsecurity.security.configs;
 
+import io.security.corespringsecurity.security.factory.MethodResourcesMapFactoryBean;
 import io.security.corespringsecurity.service.SecurityResourceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,20 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration{
         // Map 기반 외부 DB 연동
         return new MapBasedMethodSecurityMetadataSource();
     }
+
+    @Bean
+    public MapBasedMethodSecurityMetadataSource mapBasedMethodSecurityMetadataSource() {
+        return new MapBasedMethodSecurityMetadataSource(methodResourcesMapFactoryBean().getObject());
+    }
+
+    @Bean
+    public MethodResourcesMapFactoryBean methodResourcesMapFactoryBean(){
+        MethodResourcesMapFactoryBean methodResourcesMapFactoryBean = new MethodResourcesMapFactoryBean();
+        methodResourcesMapFactoryBean.setSecurityResourceService(securityResourceService);
+        methodResourcesMapFactoryBean.setResourceType("method");
+        return methodResourcesMapFactoryBean;
+    }
+
 
     @Bean
     public AccessDecisionVoter<? extends Object> roleVoter() {
