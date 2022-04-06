@@ -15,9 +15,9 @@ public class AopSecurityController {
     @Autowired
     private AopMethodService aopMethodService;
 
-//    @Autowired
-//    private AopPointcutService aopPointcutService;
-//
+    @Autowired
+    private AopPointcutService aopPointcutService;
+
 //    @Autowired
 //    private AopLiveMethodService aopLiveMethodService;
 
@@ -40,16 +40,16 @@ public class AopSecurityController {
         return "aop/method";
     }
 
-//    @GetMapping("/pointcutSecured")
-//    public String pointcutSecured(Model model){
-//
-//        aopPointcutService.notSecured();
-//        aopPointcutService.pointcutSecured();
-//        model.addAttribute("method", "Success PointcutSecured");
-//
-//        return "aop/method";
-//    }
-//
+    @GetMapping("/pointcutSecured")
+    public String pointcutSecured(Model model){
+
+        aopPointcutService.notSecured();
+        aopPointcutService.pointcutSecured();
+        model.addAttribute("method", "Success PointcutSecured");
+
+        return "aop/method";
+    }
+
 //    @GetMapping("/liveMethodSecured")
 //    public String liveMethodSecured(Model model){
 //
