@@ -138,12 +138,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new AjaxAuthenticationFailureHandler();
     }
 
-    @Bean
-    public RoleHierarchyImpl roleHierarchy() {
-        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        return roleHierarchy;
-    }
-
     public AccessDeniedHandler accessDeniedHandler() {
         FormAccessDeniedHandler commonAccessDeniedHandler = new FormAccessDeniedHandler();
         commonAccessDeniedHandler.setErrorPage("/denied");
@@ -166,13 +160,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     // 웹 기반 인가 실시간 반영
+
     @Bean
     public UrlResourcesMapFactoryBean urlResourcesMapFactoryBean(){
         UrlResourcesMapFactoryBean urlResourcesMapFactoryBean = new UrlResourcesMapFactoryBean();
         urlResourcesMapFactoryBean.setSecurityResourceService(securityResourceService);
         return urlResourcesMapFactoryBean;
     }
-
     private AccessDecisionManager affirmativeBased() {
         AffirmativeBased affirmativeBased = new AffirmativeBased(getAccessDecisionVoters());
         return affirmativeBased;
@@ -181,7 +175,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private List<AccessDecisionVoter<?>> getAccessDecisionVoters() {
 
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoters = new ArrayList<>();
-        accessDecisionVoters.add(new IpAddressVoter(securityResourceService));
+//        accessDecisionVoters.add(new IpAddressVoter(securityResourceService)); // IP 검사
         accessDecisionVoters.add(roleVoter());
 
 //      return Arrays.asList(new RoleVoter()); // 각각권한 적용
@@ -194,5 +188,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         RoleHierarchyVoter roleHierarchyVoter = new RoleHierarchyVoter(roleHierarchy());
         return roleHierarchyVoter;
+    }
+
+    @Bean
+    public RoleHierarchyImpl roleHierarchy() {
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        return roleHierarchy;
     }
 }
