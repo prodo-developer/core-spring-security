@@ -18,9 +18,8 @@ public class SecurityResourceService {
     private ResourcesRepository resourcesRepository;
     private AccessIpRepository accessIpRepository;
 
-    public SecurityResourceService(ResourcesRepository resourcesRepository, AccessIpRepository accessIpRepository) {
+    public SecurityResourceService(ResourcesRepository resourcesRepository) {
         this.resourcesRepository = resourcesRepository;
-        this.accessIpRepository = accessIpRepository;
     }
 
     /**

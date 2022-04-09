@@ -13,9 +13,17 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    public SecurityResourceService securityResourceService(ResourcesRepository resourcesRepository, AccessIpRepository accessIpRepository) {
-        SecurityResourceService securityResourceService = new SecurityResourceService(resourcesRepository, accessIpRepository);
+    public SecurityResourceService securityResourceService(ResourcesRepository resourcesRepository) {
+        SecurityResourceService securityResourceService = new SecurityResourceService(resourcesRepository);
 
         return securityResourceService;
     }
+
+    // address 적용 후
+//    @Bean
+//    public SecurityResourceService securityResourceService(ResourcesRepository resourcesRepository, AccessIpRepository accessIpRepository) {
+//        SecurityResourceService securityResourceService = new SecurityResourceService(resourcesRepository, accessIpRepository);
+//
+//        return securityResourceService;
+//    }
 }
